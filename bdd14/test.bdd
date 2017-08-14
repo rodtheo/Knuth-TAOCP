@@ -1,0 +1,16 @@
+# reproducing example 7.1.4-(8)
+f2=c1
+f3=c1
+f4=c1
+f5=c1
+f6=c1
+f7=c1
+f8=c1
+f2=x4?c0:c1
+f3=x4?c1:c0
+f4=x3?f3:f2
+f5=x3?c1:c0
+f6=x2?c0:c1
+f7=x2?f5:f4
+f8=x1?f7:f6
+f0=f8

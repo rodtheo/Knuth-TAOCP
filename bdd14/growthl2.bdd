@@ -1,0 +1,10 @@
+# beginning the output of BDDL-RGROWTH 2
+f1=c1
+f2=c1
+f0=x0?f1:c0
+f500=x0?c0:f2
+f501=x0?c0:f1
+f0=x1?f500:f0
+f1=f0
+f1=x2?f1:c0
+! f1 represents restricted growth sequences of length 2
