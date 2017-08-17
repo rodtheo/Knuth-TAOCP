@@ -1,0 +1,1 @@
+gcc -m32 -o bdd14 bdd14.c /Users/rodtheo/Bioinfo/PROGRAMAS/LIBS/C/SGB/gb_flip.c -I/Users/rodtheo/Bioinfo/PROGRAMAS/LIBS/C/SGB -L/Users/rodtheo/Bioinfo/PROGRAMAS/LIBS/C/SGB

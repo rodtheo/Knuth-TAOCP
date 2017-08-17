@@ -10,30 +10,30 @@
 #define logpagesize 12
 #define memsize (1<<29)  \
 
-#define pagesize (1<<logpagesize) 
-#define pagemask (pagesize-1) 
-#define pageints (pagesize/sizeof(int) ) 
-#define node_(a) ((node*) (size_t) (a) ) 
+#define pagesize (1<<logpagesize)
+#define pagemask (pagesize-1)
+#define pageints (pagesize/sizeof(int) )
+#define node_(a) ((node*) (size_t) (a) )
 #define page_(a) ((page*) (size_t) (a) )  \
 
 #define topofmem ((page*) &mem[memsize])  \
 
 #define logmaxhashsize 21
-#define slotsperpage (pagesize/sizeof(addr) ) 
+#define slotsperpage (pagesize/sizeof(addr) )
 #define maxhashpages (((1<<logmaxhashsize) +slotsperpage-1) /slotsperpage)  \
 
 #define logvarsize 10
-#define varsize (1<<logvarsize) 
-#define varpart(x) ((x) >>(32-logvarsize) ) 
+#define varsize (1<<logvarsize)
+#define varpart(x) ((x) >>(32-logvarsize) )
 #define initnewnode(p,v,l,h) oo,p->lo= addr_(l) ,p->hi= addr_(h) ,p->xref= 0, \
 oooo,p->index= ((v) <<(32-logvarsize) ) +(gb_next_rand() >>(logvarsize-1) )  \
 
 #define topofvars &varhead[varsize] \
 
-#define hashcode(l,h) ((addr*) (size_t) (oo,((l) ->index<<3) ^((h) ->index<<2) ) ) 
-#define hashedcode(p) hashcode(node_(p->lo) ,node_(p->hi) ) 
-#define addr__(x) (*((addr*) (size_t) (x) ) ) 
-#define fetchnode(v,k) node_(addr__(v->base[(k) >>logpagesize]+((k) &pagemask) ) ) 
+#define hashcode(l,h) ((addr*) (size_t) (oo,((l) ->index<<3) ^((h) ->index<<2) ) )
+#define hashedcode(p) hashcode(node_(p->lo) ,node_(p->hi) )
+#define addr__(x) (*((addr*) (size_t) (x) ) )
+#define fetchnode(v,k) node_(addr__(v->base[(k) >>logpagesize]+((k) &pagemask) ) )
 #define storenode(v,k,p) o,addr__(v->base[(k) >>logpagesize]+((k) &pagemask) ) = addr_(p)  \
 
 #define storenulls(k) *(long long*) (size_t) (k) = 0LL; \
@@ -47,21 +47,21 @@ oooo,p->index= ((v) <<(32-logvarsize) ) +(gb_next_rand() >>(logvarsize-1) )  \
 #define memo_(a) ((memo*) (size_t) (a) )  \
 
 #define logmaxcachepages 15
-#define maxcachepages (1<<logmaxcachepages) 
-#define cacheslotsperpage (pagesize/sizeof(memo) ) 
+#define maxcachepages (1<<logmaxcachepages)
+#define cacheslotsperpage (pagesize/sizeof(memo) )
 #define maxbinop 15 \
 
 #define id(a) (((size_t) (a) -(size_t) mem) /sizeof(node) )  \
 
 #define cachehash(f,g,h)  \
-((f) ->index<<4) ^(((h) ?(g) ->index:addr_(g) ) <<5) ^(addr_(h) <<6) 
+((f) ->index<<4) ^(((h) ?(g) ->index:addr_(g) ) <<5) ^(addr_(h) <<6)
 #define thememo(s) memo_(cachepage[((s) &cachemask) >>logpagesize]+((s) &pagemask) )  \
 
 #define extsize 1000 \
 
-#define thevar(p) (&varhead[varpart((p) ->index) ]) 
+#define thevar(p) (&varhead[varpart((p) ->index) ])
 #define print_node(p)  \
-printf("%x: (~%d?%x:%x)",id(p) ,thevar(p) ->name,id((p) ->lo) ,id((p) ->hi) ) 
+printf("%x: (~%d?%x:%x)",id(p) ,thevar(p) ->name,id((p) ->lo) ,id((p) ->hi) )
 #define print_node_unmapped(p)  \
 printf("%x: (~%d?%x:%x)",id(p) ,thevar(p) -varhead,id((p) ->lo) ,id((p) ->hi) )  \
 
@@ -73,7 +73,7 @@ printf("%x: (~%d?%x:%x)",id(p) ,thevar(p) -varhead,id((p) ->lo) ,id((p) ->hi) ) 
 {printf("! %s in node ",complaint) ; \
 print_node(p) ;printf("\n") ;}
 #define legit(p) (((size_t) (p) &(sizeof(node) -1) ) ==0&&(p) <nodeptr&& \
-(p) >=botsink&&ghost(p) ->xref!=-1) 
+(p) >=botsink&&ghost(p) ->xref!=-1)
 #define superlegit(p) (((size_t) (p) &(sizeof(node) -1) ) ==0&&(p) <nodeptr&& \
 (p) > topsink&&ghost(p) ->xref!=-1)  \
 
@@ -103,11 +103,11 @@ getk;if(k>=varsize) {printf("x%d is out of range.\n",k) ;continue;} \
 /*2:*/
 #line 82 "./bdd14.w"
 
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <ctype.h> 
-#include "gb_flip.h" 
-#define verbose Verbose 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "gb_flip.h"
+#define verbose Verbose
 /*10:*/
 #line 204 "./bdd14.w"
 
@@ -201,11 +201,11 @@ int cachemask;
 /*:40*//*42:*/
 #line 876 "./bdd14.w"
 
-char*binopname[]= 
+char*binopname[]=
 {"","&",">","!","<","@","^","|","_","A","N","#","Y","$","D","E"};
-char*ternopname1[]= 
+char*ternopname1[]=
 {"?",".","&","&","@","#","$","%","*","<","-","+","|","/","\\","~"};
-char*ternopname2[]= 
+char*ternopname2[]=
 {":",".","&","E","@","#","$","%","*","<","-","+","|","/","\\","~"};
 
 /*:42*//*51:*/
